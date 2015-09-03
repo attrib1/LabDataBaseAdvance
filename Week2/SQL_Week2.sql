@@ -100,3 +100,6 @@ alter table table7 add year datetime
 	
 alter table table7
 add constraint limit_year check (year > 2001 )
+
+insert into table7(col1,col2,col3,year) 
+	values (4,100,'test4',2014)
