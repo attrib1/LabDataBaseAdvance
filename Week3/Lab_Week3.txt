@@ -1,0 +1,74 @@
+/*drop database TestLab2*/
+CREATE DATABASE dbpersonnel
+ON PRIMARY
+(
+	NAME = test_DAT,
+	FILENAME = 'D:\56110177\dbpersonnel.mdf',
+	SIZE = 4,
+	MAXSIZE = 20,
+	FILEGROWTH=1
+)
+LOG ON
+(
+	NAME = test_LOG,
+	FILENAME = 'D:\56110177\dbpersonnel.ldf',
+	SIZE=2,
+	MAXSIZE=5,
+	FILEGROWTH=1
+)
+
+
+create table employee
+(
+	empnum char(4),
+	empname varchar(15),
+	hiredate datetime,
+	salary int,
+	position varchar(15),
+	depno char(2),
+	mgrno char(4),
+
+	constraint employee_pk primary key (empnum)
+)
+
+
+
+create table dep(
+
+	depno char(2),
+	depname varchar(15),
+	location varchar(15),
+	
+	constraint depno_pk primary key (depno)
+)
+
+create table project
+(
+	projno char(2),
+	projdesc varchar(20),
+	startdate datetime,
+	enddate   datetime,
+	budget  int,
+
+	constraint projno_pk primary key (projno)
+)	
+
+create table projwork
+(
+	projno char(2),
+	empnum char(4),
+	hours	smallint,
+)
+
+alter table employee
+add constraint depno_fk foreing key(depno)
+references dep (depno)
+
+alter table projwork
+add constraint projwork_fk foreing key(projno)
+references project (projno)
+
+
+alter table projwork
+add constraint empnum_fk foreing key(empnum)
+references employee (empnum)
