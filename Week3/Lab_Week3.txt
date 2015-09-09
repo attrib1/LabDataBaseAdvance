@@ -192,3 +192,32 @@ select top 5 employee.empnum,employee.empname from employee order by employee.em
 /*-----------  Start Lab ....select จากด้านบนสามารถย่อได้ดังนี้ ----*/
 select top 5 e.empnum,e.empname from employee as e order by e.empname
 
+/*-----------  Start Lab ....select  ให้แสดงชื่อคอลัมใหม่ตอนแสดง ----*/
+select top 5 e.empnum as "employee number",e.empname as "employee name"
+from employee as e order by e.empname
+
+
+
+/*test lab not compeate
+
+
+*/
+
+
+/*Lab test show */
+
+/*DISTINCT Command  ------------ ผลที่เกิด...*/
+select distinct projno from projwork
+
+/* TOP n command ------ ผลที่เกิด...*/
+select top 3 empname,salary from employee order by salary
+
+/* INTO command for creating new table-----ผลที่เกิด...*/
+select empname , salary , position  into emp1 from employee 
+	order by empname
+
+/* Show data from new table */
+select * from emp1
+
+/*Delete new table emp1*/
+drop table emp1
