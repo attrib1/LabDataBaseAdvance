@@ -72,3 +72,78 @@ references project (projno)
 alter table projwork
 add constraint empnum_fk foreing key(empnum)
 references employee (empnum)
+
+insert into dep (depno,depname,location)
+	values ('10','accounting','silom')
+
+insert into dep (depno,depname,location)
+	values ('20','administration','sukumvit')
+
+insert into dep (depno,depname,location)
+	values ('30','marketing','ratchada')
+
+	insert into dep (depno,depname,location)
+	values ('40','finance','silom')
+
+insert into dep (depno,depname,location)
+	values ('50','research','sukumvit')
+
+
+
+insert into project (projno,projdesc,startdate,enddate,budget)
+values ('01','new project','10/01/2008','03/31/2009','500000')
+
+
+insert into project (projno,projdesc,startdate,enddate,budget)
+values ('02','bill collection','11/01/2009','06/30/2010','1000000')	
+
+
+insert into project (projno,projdesc,startdate,enddate,budget)
+values ('03','new building','10/01/2008','03/31/2009','500000')
+
+
+
+
+/*-----------------------------*/
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('1001','phatcharapa','06/13/2008','9000','clerk','10','1002')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('1002','chakrit','10/31/2008','30000','controller','10','1003')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('1003','nadate','03/15/2009','30000','manager','10','2002')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('1004','yaya','06/04/2009','12000','clerk','10','1002')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('2001','mario','05/14/2008','14000','clerk','20','2003')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('2002','tomdundee','01/10/2009','50000','drirector','20','')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('2003','leeminho','11/01/2008','24000','manager','20','2002')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('3001','zuckerberg','08/15/2010','17000','salesman','30','3004')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('3002','steveJob','15/05/2010','13000','salesman','30','3004')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('3003','paula','06/11/2008','290000','manager','30','2002')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('3004','dome','06/14/2009','25000','supervisor','30','3003')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('3005','stephan','07/03/2009','10000','salesman','30','3004')	
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('4001','romeo','12/26/2008','33000','manager','40','2002')
+
+insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
+values ('4002','juliet','12/01/2009','9000','clerk','40','4001')		
+
