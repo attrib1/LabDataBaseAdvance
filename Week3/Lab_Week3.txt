@@ -147,3 +147,48 @@ values ('4001','romeo','12/26/2008','33000','manager','40','2002')
 insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
 values ('4002','juliet','12/01/2009','9000','clerk','40','4001')		
 
+
+
+/*---------------------------------------------------*/
+insert into projwork (projno,empnum,hours)
+	values ('01','3001','25')
+
+insert into projwork (projno,empnum,hours)
+	values ('01','3003','30')	
+
+insert into projwork (projno,empnum,hours)
+	values ('02','4002','40')
+
+insert into projwork (projno,empnum,hours)
+	values ('03','2003','20')
+
+insert into projwork (projno,empnum,hours)
+	values ('03','2001','30')
+
+
+/*-----------  Start Lab ....select ----*/
+
+select projno from projwork
+
+/*-----------  Start Lab ....select  ตัวที่ไม่ซ้ำ  (not same)----*/
+select distinct projno from projwork
+
+select distinct projno,empnum from projwork
+
+
+/*-----------  Start Lab ....select ทุกคอลัม เเรียงจากน้อยไปมาก คอลัม hours ----*/
+select * from projwork order by hours
+
+
+/*-----------  Start Lab ....select ทุกคอมลัม เเรียงจากมากไปน้อยในคอลัม hours ----*/
+select * from projwork order by hours desc
+
+/*-----------  Start Lab ....select  เราสามารถนำชื่อคอลัมใส่เข้าไปได้เช่นกัน ----*/
+select employee.empnum, employee.empname from employee.empname
+
+/*-----------  Start Lab ....select 5 อันดับแรกของตาราง top 5----*/
+select top 5 employee.empnum,employee.empname from employee order by employee.empname
+
+/*-----------  Start Lab ....select จากด้านบนสามารถย่อได้ดังนี้ ----*/
+select top 5 e.empnum,e.empname from employee as e order by e.empname
+
