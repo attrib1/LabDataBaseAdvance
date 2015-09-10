@@ -1,8 +1,7 @@
-ï»¿/*drop database TestLab2*/
 CREATE DATABASE dbpersonnel
 ON PRIMARY
 (
-	NAME = test_DAT,
+	NAME = dbpersonnel_DAT,
 	FILENAME = 'D:\56110177\dbpersonnel.mdf',
 	SIZE = 4,
 	MAXSIZE = 20,
@@ -10,8 +9,8 @@ ON PRIMARY
 )
 LOG ON
 (
-	NAME = test_LOG,
-	FILENAME = 'D:\56110177\dbpersonnel.ldf',
+	NAME = dbpersonnel_LOG,
+	FILENAME = 'D:\56110177\dbpersonnel_LOG.ldf',
 	SIZE=2,
 	MAXSIZE=5,
 	FILEGROWTH=1
@@ -31,8 +30,6 @@ create table employee
 	constraint employee_pk primary key (empnum)
 )
 
-
-
 create table dep(
 
 	depno char(2),
@@ -41,7 +38,6 @@ create table dep(
 	
 	constraint depno_pk primary key (depno)
 )
-
 create table project
 (
 	projno char(2),
@@ -60,6 +56,9 @@ create table projwork
 	hours	smallint,
 )
 
+alter table project
+add projno char(3)
+
 alter table employee
 add constraint depno_fk foreign key(depno)
 references dep (depno)
@@ -72,6 +71,7 @@ references project (projno)
 alter table projwork
 add constraint empnum_fk foreign key(empnum)
 references employee (empnum)
+
 
 
 insert into dep (depno,depname,location)
@@ -88,8 +88,8 @@ insert into dep (depno,depname,location)
 
 insert into dep (depno,depname,location)
 	values ('50','research','sukumvit')
-
-
+	
+	
 
 insert into project (projno,projdesc,startdate,enddate,budget)
 values ('01','new project','10/01/2008','03/31/2009','500000')
@@ -102,9 +102,7 @@ values ('02','bill collection','11/01/2009','06/30/2010','1000000')
 insert into project (projno,projdesc,startdate,enddate,budget)
 values ('03','new building','10/01/2008','03/31/2009','500000')
 
-
-
-
+select * from employee
 /*-----------------------------*/
 insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
 values ('1001','phatcharapa','06/13/2008','9000','clerk','10','1002')	
@@ -148,8 +146,8 @@ values ('4001','romeo','12/26/2008','33000','manager','40','2002')
 insert into employee(empnum,empname,hiredate,salary,position,depno,mgrno)
 values ('4002','juliet','12/01/2009','9000','clerk','40','4001')		
 
-
-
+select * from projwork
+delete from projwork where  projno = '01'
 /*---------------------------------------------------*/
 insert into projwork (projno,empnum,hours)
 	values ('01','3001','25')
@@ -171,49 +169,45 @@ insert into projwork (projno,empnum,hours)
 
 select projno from projwork
 
-/*-----------  Start Lab ....select  à¸•à¸±à¸§à¸—à¸µà¹ˆà¹„à¸¡à¹ˆà¸‹à¹‰à¸³  (not same)----*/
+/*-----------  Start Lab ....select  µÑÇ·ÕèäÁè«éÓ  (not same)----*/
 select distinct projno from projwork
 
 select distinct projno,empnum from projwork
 
 
-/*-----------  Start Lab ....select à¸—à¸¸à¸à¸„à¸­à¸¥à¸±à¸¡ à¹€à¹€à¸£à¸µà¸¢à¸‡à¸ˆà¸²à¸à¸™à¹‰à¸­à¸¢à¹„à¸›à¸¡à¸²à¸ à¸„à¸­à¸¥à¸±à¸¡ hours ----*/
+/*-----------  Start Lab ....select ·Ø¡¤ÍÅÑÁ ààÃÕÂ§¨Ò¡¹éÍÂä»ÁÒ¡ ¤ÍÅÑÁ hours ----*/
 select * from projwork order by hours
 
 
-/*-----------  Start Lab ....select à¸—à¸¸à¸à¸„à¸­à¸¡à¸¥à¸±à¸¡ à¹€à¹€à¸£à¸µà¸¢à¸‡à¸ˆà¸²à¸à¸¡à¸²à¸à¹„à¸›à¸™à¹‰à¸­à¸¢à¹ƒà¸™à¸„à¸­à¸¥à¸±à¸¡ hours ----*/
+/*-----------  Start Lab ....select ·Ø¡¤ÍÁÅÑÁ ààÃÕÂ§¨Ò¡ÁÒ¡ä»¹éÍÂã¹¤ÍÅÑÁ hours ----*/
 select * from projwork order by hours desc
 
-/*-----------  Start Lab ....select  à¹€à¸£à¸²à¸ªà¸²à¸¡à¸²à¸£à¸–à¸™à¸³à¸Šà¸·à¹ˆà¸­à¸„à¸­à¸¥à¸±à¸¡à¹ƒà¸ªà¹ˆà¹€à¸‚à¹‰à¸²à¹„à¸›à¹„à¸”à¹‰à¹€à¸Šà¹ˆà¸™à¸à¸±à¸™ ----*/
-select employee.empnum, employee.empname from employee.empname
+/*-----------  Start Lab ....select  àÃÒÊÒÁÒÃ¶¹Óª×èÍ¤ÍÅÑÁãÊèà¢éÒä»ä´éàªè¹¡Ñ¹ ----*/
+select employee.empnum, employee.empname from employee
 
-/*-----------  Start Lab ....select 5 à¸­à¸±à¸™à¸”à¸±à¸šà¹à¸£à¸à¸‚à¸­à¸‡à¸•à¸²à¸£à¸²à¸‡ top 5----*/
+/*-----------  Start Lab ....select 5 ÍÑ¹´ÑºáÃ¡¢Í§µÒÃÒ§ top 5----*/
 select top 5 employee.empnum,employee.empname from employee order by employee.empname
 
-/*-----------  Start Lab ....select à¸ˆà¸²à¸à¸”à¹‰à¸²à¸™à¸šà¸™à¸ªà¸²à¸¡à¸²à¸£à¸–à¸¢à¹ˆà¸­à¹„à¸”à¹‰à¸”à¸±à¸‡à¸™à¸µà¹‰ ----*/
+/*-----------  Start Lab ....select ¨Ò¡´éÒ¹º¹ÊÒÁÒÃ¶ÂèÍä´é´Ñ§¹Õé ----*/
 select top 5 e.empnum,e.empname from employee as e order by e.empname
 
-/*-----------  Start Lab ....select  à¹ƒà¸«à¹‰à¹à¸ªà¸”à¸‡à¸Šà¸·à¹ˆà¸­à¸„à¸­à¸¥à¸±à¸¡à¹ƒà¸«à¸¡à¹ˆà¸•à¸­à¸™à¹à¸ªà¸”à¸‡ ----*/
+/*-----------  Start Lab ....select  ãËéáÊ´§ª×èÍ¤ÍÅÑÁãËÁèµÍ¹áÊ´§ ----*/
 select top 5 e.empnum as "employee number",e.empname as "employee name"
 from employee as e order by e.empname
 
-
-
-/*test lab not complete
-
-
-*/
+/*** start test */
+select top 5 empname+' '+position As 'employee name' from  employee order by  empname desc
 
 
 /*Lab test show */
 
-/*DISTINCT Command  ------------ à¸œà¸¥à¸—à¸µà¹ˆà¹€à¸à¸´à¸”...*/
+/*DISTINCT Command  ------------ ¼Å·Õèà¡Ô´...*/
 select distinct projno from projwork
 
-/* TOP n command ------ à¸œà¸¥à¸—à¸µà¹ˆà¹€à¸à¸´à¸”...*/
+/* TOP n command ------ ¼Å·Õèà¡Ô´...*/
 select top 3 empname,salary from employee order by salary
 
-/* INTO command for creating new table-----à¸œà¸¥à¸—à¸µà¹ˆà¹€à¸à¸´à¸”...*/
+/* INTO command for creating new table-----¼Å·Õèà¡Ô´...*/
 select empname , salary , position  into emp1 from employee 
 	order by empname
 
@@ -222,6 +216,7 @@ select * from emp1
 
 /*Delete new table emp1*/
 drop table emp1
+
 
 
 
@@ -269,4 +264,5 @@ WHERE EMPNAME NOT LIKE '%A%'
 SELECT EMPNAME,SALARY,HIREDATE
 FROM EMPLOYEE
 WHERE SALARY > 20000 AND HIREDATE >= '01/01/1994'
+
 
