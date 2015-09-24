@@ -147,7 +147,11 @@ select e.empname ,e.position,d.depname,d.location ,e.salary from employee e, dep
 select  d.depname , d.location from dep d,employee e
 	where  not exists (select depno  from dep where e.depno = d.depno )
 
+select * from emp1 
+
 select * from employee 
+
+select * from dep  where NOT EXISTS (select * from employee where employee.depno = dep.depno)
 
 
 /*http://stackoverflow.com/questions/367863/sql-find-records-from-one-table-which-dont-exist-in-another*/
