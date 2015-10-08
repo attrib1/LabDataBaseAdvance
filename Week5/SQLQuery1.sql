@@ -50,7 +50,9 @@ create view EMPVIEW
   from employee
   
   select * from EMPDEP
+  
   drop view empdep
+  
   create view EMPDEP
 	as select empname,dep.depname,salary from employee ,dep
 	  where dep.depno = employee.depno and salary > 20000
@@ -60,14 +62,13 @@ create view EMPVIEW
 		 from employee group by depno 
 	 
 
-	create view emptemp
-	as 
-	select employee.empnum,employee.empname,employee.position,employee.depno 
-	from employee
-		where  EXISTS (select employee.depno from dep,employee where employee.depno = dep.depno )	  
-		with check option
+	create view emptemp	
+	as select employee.empnum,employee.empname,employee.position,employee.depno 
+		from employee
+			where  EXISTS (select employee.depno from dep,employee where employee.depno = dep.depno )	  
+				with check option
 		
-		drop view emptemp
+drop view emptemp
 
-select * from DEPSAL
+select * from emptemp
 select * from employee
