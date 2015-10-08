@@ -72,3 +72,4 @@ CREATE PROC sp_ShowEmployeeSalary
 AS SELECT empnum,empname,salary FROM EMPLOYEE WHERE salary > @salary
 
 EXEC sp_ShowEmployeeSalary 10000
+
