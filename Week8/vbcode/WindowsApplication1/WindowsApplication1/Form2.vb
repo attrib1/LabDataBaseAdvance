@@ -51,7 +51,9 @@ Public Class Form2
         Dim sqlCommand As New SqlCommand(sqlinsert, sqlConnection)
         sqlConnection.Open()
         'sqlCommand.ExecuteNonQuery()
+
         For i = 0 To ListBox1.Items.Count() - 1
+
             sqlinsert = ("" & sql)
             sqlCommand.ExecuteNonQuery()
         Next
